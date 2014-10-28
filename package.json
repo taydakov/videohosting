@@ -1,9 +1,9 @@
 {
-  name: "node upload",
-  description: "simple upload logic for node",
-  version: "0.0.1",
+  "name": "node-upload",
+  "description": "simple upload logic for node",
+  "version": "0.0.1",
 
-  dependencies: {
+  "dependencies": {
     "express": "~4.0.0",
     "body-parser": "~1.5.0",
     "ejs": "~0.8.4",
