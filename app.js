@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var multiparty = require('multiparty');
 var util = require('util');
 var path = require('path');
+var JSONStorage = require('./jsonstorage.js');
 
 var app = express();
 
@@ -13,6 +14,10 @@ app.set('view engine', 'ejs');
 /* middleware */
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+/* load data */
+var jsstorage = new JSONStorage('./datastorage.json');
+console.log(jsstorage.data);
 
 /* routes */
 app.get('/', require('./routes/index'));
