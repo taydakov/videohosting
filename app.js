@@ -1,12 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var multipart = require('connect-multiparty');
+var path = require('path');
 
 var app = express();
 
-app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+/* view render */
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+/* middleware */
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/upload', multipart({
@@ -15,13 +18,16 @@ app.use('/upload', multipart({
 	return res.json(200, req.files);
 });
 
-app.get('/', function(req, res) {
-	res.send('Hello World!');
+/* routes */
+app.get('/', require('./routes/index'));
+
+/* catch error */
+app.use(function(req, res, next) {
+	res.end('Troubles!');
 });
 
-var server = app.listen(8000, function(data) {
-	var host = server.address().address;
-	var port = server.address().port;
-
-	console.log("Server is listening at " + host + ":" + port);
+/* web server */
+app.set('webport', process.env.WEBPORT || 3000);
+var server = app.listen(app.get('webport'), function() {
+	console.log('server is on port ' + server.address().port);
 });
