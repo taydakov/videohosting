@@ -19,7 +19,7 @@ JSONStorage.prototype.loadData = function() {
 
 /* Save data to storage file */
 JSONStorage.prototype.saveData = function() {
-	fs.writeFileSync(this.filepath, JSON.stringify(this.data));
+	fs.writeFileSync(this.filepath, JSON.stringify(this.data, undefined, 2));
 }
 
 module.exports = JSONStorage;

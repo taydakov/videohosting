@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 /* load data */
-var jsstorage = new JSONStorage('./datastorage.json');
-console.log(jsstorage.data);
+var jsStorage = new JSONStorage('./datastorage.json');
+console.log(jsStorage.data);
 
 /* routes */
 app.get('/', require('./routes/index'));
@@ -31,7 +31,9 @@ app.post('/upload', function(req, res) {
 		res.writeHead(200, {'content-type': 'text/plain'});
 		res.write('received upload:\n\n');
 		res.end(util.inspect({fields: fields, files: files}));
-		console.log(files);
+		/* Save video to the data storage */
+		jsStorage.push(files["videofile"][0].path);
+		jsStorage.saveData();
 	});
 
 	return;
