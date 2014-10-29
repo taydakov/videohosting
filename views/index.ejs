@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<form action="/upload" enctype="multipart/form-data" method="post">
-		    <input type="file" name="videofile">
+		    <input type="file" name="videofile" accept="video/*">
 		    <input type="submit" value="Upload">
 		</form><hr>
 		<% videos.forEach(function(video) { %>
