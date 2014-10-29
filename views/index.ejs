@@ -7,6 +7,7 @@
 		<form action="/upload" enctype="multipart/form-data" method="post">
 		    <input type="file" name="videofile" accept="video/*">
 		    <input type="submit" value="Upload">
+		    <span>Please don't upload big files.</span>
 		</form><hr>
 		<% videos.forEach(function(video) { %>
 		<video controls>
