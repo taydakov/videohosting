@@ -14,8 +14,8 @@ router.post('/upload', function(req, res) {
 
 	form.parse(req, function(err, fields, files) {
 		/* Save video to the data storage */
-		if (files.videofile && files.videofile[0].size !== 0) {
-			videodata.push(path.basename(files.videofile[0].path));
+		if (files.file && files.file[0].size !== 0) {
+			videodata.push(path.basename(files.file[0].path));
 			videodata.saveData();
 		}
 		res.redirect('/');

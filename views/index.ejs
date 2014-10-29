@@ -19,18 +19,18 @@
 			</div>
 
 			<div class="jumbotron">
-				<form action="/upload" enctype="multipart/form-data" method="post">
-					<input class="btn btn-success" type="file" name="videofile" accept="video/*">
-					<input class="btn btn-success" type="submit" value="Upload">
+				<form role="form" name="uploadForm" ng-submit="uploadSubmit(uploadForm)">
+					<input id="videofile" class="btn btn-primary" type="file" accept="video/*" ng-file-select="onFileSelect($files)">
+					<input class="btn btn-primary" type="submit" value="Upload">
 					<span>Please don't upload big files.</span>
+					<div class="progress" ng-show="uploading.isactive">
+						<div class="progress-bar" role="progressbar" aria-valuenow="{{ uploading.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploading.percentage }}%;">
+							{{ uploading.percentage }}%
+						</div>
+					</div>
 				</form>
 			</div>
 
-			<!-- <form action="/upload" enctype="multipart/form-data" method="post">
-				<input type="file" name="videofile" accept="video/*">
-				<input type="submit" value="Upload">
-				<span>Please don't upload big files.{{var1}}</span>
-			</form> -->
 			<% videos.forEach(function(video) { %>
 			<div class="img-thumbnail">
 				<video class="img-responsive" controls>
@@ -42,6 +42,8 @@
 
 		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="/js/ng-fileupload/angular-file-upload.min.js"></script>
+		<script src="/js/ng-fileupload/angular-file-upload-shim.min.js"></script>
 		<script src="/js/index.js"></script>
 	</body>
 </html>
