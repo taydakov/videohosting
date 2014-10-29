@@ -14,12 +14,19 @@ JSONStorage.prototype.push = function(newData) {
 
 /* Load data from storage file */
 JSONStorage.prototype.loadData = function() {
-	this.data = JSON.parse(fs.readFileSync(this.filepath).toString());
+	this.data = [];
+	var self = this;
+	fs.readFile(this.filepath, function(err, data) {
+		if (err) return this.data = [];
+		self.data = JSON.parse(data.toString());
+	});
 }
 
 /* Save data to storage file */
 JSONStorage.prototype.saveData = function() {
-	fs.writeFileSync(this.filepath, JSON.stringify(this.data, undefined, 2));
+	fs.writeFile(this.filepath, JSON.stringify(this.data, undefined, 2), function(err) {
+		console.log(err);
+	});
 }
 
 module.exports = JSONStorage;

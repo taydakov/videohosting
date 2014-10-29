@@ -1,5 +1,17 @@
-<form action="/upload" enctype="multipart/form-data" method="post">
-    <input type="text" name="title"><br>
-    <input type="file" name="videofile"><br>
-    <input type="submit" value="Upload">
-</form>
+<!doctype html>
+<html>
+	<head>
+		<title>Simple video hosting</title>
+	</head>
+	<body>
+		<form action="/upload" enctype="multipart/form-data" method="post">
+		    <input type="file" name="videofile">
+		    <input type="submit" value="Upload">
+		</form><hr>
+		<% videos.forEach(function(video) { %>
+		<video controls>
+			<source src="<%= video %>">
+		</video>
+		<% }) %>
+	</body>
+</html>
