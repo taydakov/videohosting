@@ -6,6 +6,8 @@ angular.module('videoApp', ['angularFileUpload'])
 		var files = null;
 		$scope.videotitle = "";
 
+		$scope.videosearch = "";
+
 		/* progress bar */
 		$scope.uploading = {};
 		$scope.uploading.isactive = false;
@@ -14,6 +16,30 @@ angular.module('videoApp', ['angularFileUpload'])
 		/* error */
 		$scope.error = {};
 		$scope.error.message = "";
+
+		// TODO: remove DOM manipulations from the controller
+		/* search request has been changed */
+		$scope.$watch('videosearch', function() {
+			var visibleElementsNumber = 0;
+
+			$('.videoitem').each(function(index) {
+				var title = $(this).find('.videotitle').html();
+				var date = $(this).find('.videodate').html();
+				var text = title + ' ' + date;
+				if (text.indexOf($scope.videosearch) !== -1) {
+					visibleElementsNumber += 1;
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
+
+			if (visibleElementsNumber === 0) {
+				$('#novideos').show();
+			} else {
+				$('#novideos').hide();
+			}
+		});
 
 		$scope.uploadSubmit = function(form) {
 			if (!files) return;

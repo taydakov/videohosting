@@ -1,0 +1,20 @@
+#videos {
+	text-align: center;
+}
+
+#novideos {
+	display: none;
+}
+
+.videoitem {
+	max-width:320px;
+	margin: 10px 10px 10px 10px;
+}
+
+.videotitle {
+	text-align: center;
+}
+
+.videodate {
+	text-align: right;
+}

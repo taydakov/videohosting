@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Simple video hosting</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/main.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
 	</head>
 	<body ng-controller="VideoListController">
@@ -15,19 +16,19 @@
 					<li><a href="#">Sing in</a></li>
 					<li><a href="#">Sing up</a></li>
 				</ul>
-				<h2 class="text-muted">Simple Video Hosting</h2>
+				<h2 class="text-info">Simple Video Hosting</h2>
 			</div>
 
 			<div class="jumbotron">
 				<form role="form" name="uploadForm" ng-submit="uploadSubmit(uploadForm)">
 					<div class="form-group">
-						<input class="form-control" placeholder="Please enter the title of the video" ng-model="videotitle" required>
+						<input type="text" class="form-control" placeholder="Please enter the title of the video" ng-model="videotitle" required>
 					</div>
 					<div class="form-group">
 						<input type="file" accept="video/*" ng-file-select="onFileSelect($files)" required>
 					</div>
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" value="Upload">
+						<input type="submit" class="btn btn-primary" value="Upload">
 						<span>{{ error.message }}</span>
 					</div>
 					<div class="progress" ng-show="uploading.isactive">
@@ -40,19 +41,25 @@
 			
 			<div class="row" style="padding-bottom: 10px">
 				<div class="col-sm-offset-8 col-sm-4">
-					<input class="form-control" type="search">
+					<input type="search" class="form-control" placeholder="Search for title or date" ng-model="videosearch">
 				</div>
 			</div>
 
-			<% videos.forEach(function(video) { %>
-			<div class="img-thumbnail" style="max-width:320px;max-height:320px">
-				<div class="text-center"><%= video.title %></div>
-				<video class="img-responsive" controls>
-					<source src="<%= video.file %>">
-				</video>
-				<div class="text-right"><%= video.date %></div>
+			<div id="videos">
+				<% videos.forEach(function(video) { %>
+				<div class="img-thumbnail videoitem">
+					<div class="text-info videotitle"><%= video.title %></div>
+					<video class="img-responsive" controls>
+						<source src="<%= video.file %>">
+					</video>
+					<div class="text-muted videodate"><%= video.date %></div>
+				</div>
+				<% }) %>
 			</div>
-			<% }) %>
+
+			<div id="novideos">
+				<h3 class="text-muted">No videos found</h3>
+			</div>
 		</div>
 
 		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
