@@ -1,3 +1,7 @@
+/*
+ * Stores data to .json file
+ */
+
 var fs = require('fs');
 
 /* Constructor */
@@ -17,7 +21,7 @@ JSONStorage.prototype.loadData = function() {
 	this.data = [];
 	var self = this;
 	fs.readFile(this.filepath, function(err, data) {
-		if (err) return this.data = [];
+		if (err) return console.log(err);
 		self.data = JSON.parse(data.toString());
 	});
 }

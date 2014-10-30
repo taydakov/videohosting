@@ -16,7 +16,10 @@ router.post('/upload', function(req, res) {
 	});
 
 	form.parse(req, function(err, fields, files) {
-		if (err) return res.send(500);
+		if (err) {
+			console.log(err);
+			return res.send(500);
+		}
 		if (!fields || !fields.videotitle)
 			return res.send(400);
 		/* Save video to the data storage */
