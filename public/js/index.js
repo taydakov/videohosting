@@ -2,14 +2,18 @@
 
 angular.module('videoApp', ['angularFileUpload'])
 	.controller('VideoListController', ['$scope', '$upload', function($scope, $upload) {
-	    $scope.uploading = {};
-	    $scope.uploading.isactive = false;
-    	$scope.uploading.percentage = 0;
+		/* title and video file */
+		var files = null;
+		$scope.videotitle = "";
 
-    	$scope.error = {};
-    	$scope.error.message = "";
+		/* progress bar */
+		$scope.uploading = {};
+		$scope.uploading.isactive = false;
+		$scope.uploading.percentage = 0;
 
-    	var files = null;
+		/* error */
+		$scope.error = {};
+		$scope.error.message = "";
 
 		$scope.uploadSubmit = function(form) {
 			if (!files) return;
@@ -19,6 +23,9 @@ angular.module('videoApp', ['angularFileUpload'])
 			$scope.uploading.percentage = 0;
 			$scope.upload = $upload.upload({
 				url: 'upload',
+				data: {
+					videotitle: $scope.videotitle
+				},
 				file: file,
 			}).progress(function(evt) {
 				$scope.uploading.percentage = parseInt(100.0 * evt.loaded / evt.total);

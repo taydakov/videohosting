@@ -1,3 +1,5 @@
+'use strict'
+
 var express = require('express');
 var multiparty = require('multiparty');
 var util = require('util');
@@ -15,9 +17,17 @@ router.post('/upload', function(req, res) {
 
 	form.parse(req, function(err, fields, files) {
 		if (err) return res.send(500);
+		if (!fields || !fields.videotitle)
+			return res.send(400);
 		/* Save video to the data storage */
 		if (files.file && files.file[0].size !== 0) {
-			videodata.push(path.basename(files.file[0].path));
+			var todayDate = new Date();
+			var todayStr = (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear();
+			videodata.push({
+				title: fields.videotitle[0],
+				file: path.basename(files.file[0].path),
+				date: todayStr,
+			});
 			videodata.saveData();
 		}
 		res.redirect('/');

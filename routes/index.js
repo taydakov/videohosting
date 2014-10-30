@@ -1,3 +1,5 @@
+'use strict'
+
 var express = require('express');
 var path = require('path');
 var videodata = require('../videodata.js');
@@ -10,7 +12,8 @@ router.get('/', function(req, res) {
 	console.log(videodata);
 
 	videodata.data.forEach(function(element, index){
-		videos.push('/videos/' + path.basename(element));
+		element.file = '/videos/' + path.basename(element.file);
+		videos.push(element);
 	});
 
 	res.render('index', {
