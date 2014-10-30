@@ -22,7 +22,7 @@
 				<form role="form" name="uploadForm" ng-submit="uploadSubmit(uploadForm)">
 					<input id="videofile" class="btn btn-primary" type="file" accept="video/*" ng-file-select="onFileSelect($files)">
 					<input class="btn btn-primary" type="submit" value="Upload">
-					<span>Please don't upload big files.</span>
+					<span>{{ error.message }}</span>
 					<div class="progress" ng-show="uploading.isactive">
 						<div class="progress-bar" role="progressbar" aria-valuenow="{{ uploading.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploading.percentage }}%;">
 							{{ uploading.percentage }}%

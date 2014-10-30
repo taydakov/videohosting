@@ -6,6 +6,9 @@ angular.module('videoApp', ['angularFileUpload'])
 	    $scope.uploading.isactive = false;
     	$scope.uploading.percentage = 0;
 
+    	$scope.error = {};
+    	$scope.error.message = "";
+
     	var files = null;
 
 		$scope.uploadSubmit = function(form) {
@@ -23,7 +26,10 @@ angular.module('videoApp', ['angularFileUpload'])
 				// file is uploaded successfully
 				location.reload();
 			})
-			//.error(...)
+			.error(function() {
+				$scope.uploading.isactive = false;
+				$scope.error.message = "Uploading is failed";
+			})
 			.then(function(success, error, progress) {
 				$scope.uploading.isactive = false;
 			});
@@ -31,5 +37,9 @@ angular.module('videoApp', ['angularFileUpload'])
 
 		$scope.onFileSelect = function(selectedFiles) {
 			files = selectedFiles;
+
+			$scope.error.message = "";
+			if (files[0].size > 10 * 1024 * 1024) // 10MiB is the max file size
+				$scope.error.message = "The file is too big to be uploaded";
 		}
 	}]);
