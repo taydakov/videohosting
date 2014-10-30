@@ -41,7 +41,7 @@
 			
 			<div class="row" style="padding-bottom: 10px">
 				<div class="col-sm-offset-8 col-sm-4">
-					<input type="search" class="form-control" placeholder="Search for title or date" ng-model="videosearch">
+					<input type="search" class="form-control" placeholder="Search for title or upload date" ng-model="videosearch">
 				</div>
 			</div>
 
@@ -49,8 +49,9 @@
 				<% videos.forEach(function(video) { %>
 				<div class="img-thumbnail videoitem">
 					<div class="text-info videotitle"><%= video.title %></div>
-					<video class="img-responsive" controls>
+					<video class="img-responsive" controls preload="none">
 						<source src="<%= video.file %>">
+						Your browser does not support video element
 					</video>
 					<div class="text-muted videodate"><%= video.date %></div>
 				</div>

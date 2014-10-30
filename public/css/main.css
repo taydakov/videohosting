@@ -11,10 +11,14 @@
 	margin: 10px 10px 10px 10px;
 }
 
-.videotitle {
+.videoitem video {
+	background-color: black;
+}
+
+.videoitem .videotitle {
 	text-align: center;
 }
 
-.videodate {
+.videoitem .videodate {
 	text-align: right;
 }

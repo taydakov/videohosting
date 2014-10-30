@@ -9,8 +9,6 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	var videos = [];
 
-	console.log(videodata);
-
 	videodata.data.forEach(function(element, index){
 		element.file = '/videos/' + path.basename(element.file);
 		videos.push(element);

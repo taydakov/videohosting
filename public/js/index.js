@@ -26,7 +26,7 @@ angular.module('videoApp', ['angularFileUpload'])
 				var title = $(this).find('.videotitle').html();
 				var date = $(this).find('.videodate').html();
 				var text = title + ' ' + date;
-				if (text.indexOf($scope.videosearch) !== -1) {
+				if (text.toLowerCase().indexOf($scope.videosearch.toLowerCase()) !== -1) {
 					visibleElementsNumber += 1;
 					$(this).show();
 				} else {
