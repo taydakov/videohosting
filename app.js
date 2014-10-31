@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var path = require('path');
+var reload = require('reload');
 
 var app = express();
 
@@ -30,11 +31,19 @@ require('./app/routes.js')(app, passport);
 
 /* catch error */
 app.use(function(req, res, next) {
-	res.send(500, 'Internal Server Error');
+	res.send(404, 'Page not found');
+});
+
+/* browser reload */
+var server = require('http').createServer(app);
+reload(server, app);
+app.set('webport', process.env.WEBPORT || 3000);
+server.listen(app.get('webport'), function(){
+  console.log("Web server listening on port " + app.get('webport'));
 });
 
 /* web server */
-app.set('webport', process.env.WEBPORT || 3000);
-var server = app.listen(app.get('webport'), function() {
-	console.log('server is on port ' + server.address().port);
-});
+// app.set('webport', process.env.WEBPORT || 3000);
+// var server = app.listen(app.get('webport'), function() {
+// 	console.log('server is on port ' + server.address().port);
+// });

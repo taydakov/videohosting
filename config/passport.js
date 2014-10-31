@@ -2,13 +2,19 @@ var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(passport) {
 
-	passport.use(new LocalStrategy(
-		function(username, password, done) {
+	passport.use(new LocalStrategy(function(username, password, done) {
 			console.log("LocalStrategy");
 			if (username === 'user' && password === 'pass')
 				return done(null, {
 					username: username,
 					role: 'user',
+					provider: 'local_in_passport.js'
+				});
+			else
+			if (username === 'anotheruser' && password === 'pass')
+				return done(null, {
+					username: username,
+					role: 'user1',
 					provider: 'local_in_passport.js'
 				});
 			else
@@ -26,7 +32,7 @@ module.exports = function(passport) {
 		console.log('DESERIALIZATION');
 		console.log(id);
 		done(null, {
-			username: username,
+			username: id,
 			role: 'user',
 			provider: 'local_in_passport.js'
 		});
